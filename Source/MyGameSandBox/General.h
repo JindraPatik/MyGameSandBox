@@ -8,6 +8,7 @@
 #include "InputMappingContext.h"
 #include "General.generated.h"
 
+class ATargetPoint;
 class UCameraComponent;
 
 UCLASS()
@@ -18,6 +19,8 @@ class MYGAMESANDBOX_API AGeneral : public APawn
 public:
 	AGeneral();
 	
+	UPROPERTY(EditAnywhere, Category = "Military Base")
+	ATargetPoint* Base_SpawnPoint;
 
 protected:
 	virtual void BeginPlay() override;
@@ -28,6 +31,14 @@ private:
 
 	UPROPERTY(EditDefaultsOnly, Category = "Input")
 	UInputAction* IA_Trigger;
+
+	UPROPERTY(EditAnywhere, Category = "Military Base")
+	TSubclassOf<AActor> MilitaryBase;
+
+	UPROPERTY()
+	AActor* MilitaryBaseInstance;
+
+	
 	
 	UCameraComponent* Camera;
 

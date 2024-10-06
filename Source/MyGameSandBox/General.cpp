@@ -6,6 +6,8 @@
 #include "EnhancedInputComponent.h"
 #include "Engine/LocalPlayer.h"
 #include "EnhancedInputSubsystems.h"
+#include "Components/ArrowComponent.h"
+#include "Engine/TargetPoint.h"
 
 AGeneral::AGeneral()
 {
@@ -19,7 +21,16 @@ AGeneral::AGeneral()
 void AGeneral::BeginPlay()
 {
 	Super::BeginPlay();
+
 	
+	
+	if (MilitaryBase && Base_SpawnPoint)
+	{
+		FVector SpawnLoc = Base_SpawnPoint->GetActorLocation();
+		FRotator SpawnRot = Base_SpawnPoint->GetArrowComponent()->GetComponentRotation();
+		FActorSpawnParameters SpawnParams;
+		MilitaryBaseInstance = GetWorld()->SpawnActor<AActor>(MilitaryBase, FVector::ZeroVector, FRotator::ZeroRotator, SpawnParams);
+	}
 }
 
 
